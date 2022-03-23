@@ -49,10 +49,12 @@ if(TRITON_ENABLE_JAVA_HTTP)
   set(EXAMPLES_PATH "src/main/java/triton/client")
   add_custom_command(
     OUTPUT "${PROJECT_TARGET_DIR}/${PROJECT_JAR}"
+    COMMAND rm -r /root/.m2/repository
     COMMAND mkdir -p ${CMAKE_INSTALL_PREFIX}/java
     COMMAND mvn clean install -Ddir=${PROJECT_TARGET_DIR}/examples
     COMMAND cp -r ${PROJECT_TARGET_DIR}/examples ${CMAKE_INSTALL_PREFIX}/java
     COMMAND cp -r ${PROJECT_TARGET_DIR}/${PROJECT_JAR} ${CMAKE_INSTALL_PREFIX}/java
+    COMMAND rm -r /root/.m2/repository
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     VERBATIM
 )
